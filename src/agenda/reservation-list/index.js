@@ -26,6 +26,8 @@ class ReservationList extends Component {
     /** specify what should be rendered instead of ActivityIndicator */
     renderEmptyData: PropTypes.func,
 
+    reservationListFooterComponent: PropTypes.element,
+
     /** onScroll ListView event */
     onScroll: PropTypes.func,
     /** Called when the user begins dragging the agenda list **/
@@ -219,7 +221,7 @@ class ReservationList extends Component {
   };
 
   render() {
-    const {reservations, selectedDay, theme, style} = this.props;
+    const {reservations, selectedDay, theme, style, reservationListFooterComponent} = this.props;
     if (!reservations || !reservations[selectedDay.toString('yyyy-MM-dd')]) {
       if (_.isFunction(this.props.renderEmptyData)) {
         return _.invoke(this.props, 'renderEmptyData');
@@ -232,6 +234,7 @@ class ReservationList extends Component {
       <FlatList
         ref={c => (this.list = c)}
         style={style}
+        ListFooterComponent={reservationListFooterComponent}
         contentContainerStyle={this.style.content}
         data={this.state.reservations}
         renderItem={this.renderRow}

@@ -289,6 +289,7 @@ export default class AgendaView extends Component {
     return (
       <ReservationList
         {...reservationListProps}
+        reservationListFooterComponent={this.props.reservationListFooterComponent}
         ref={c => (this.list = c)}
         reservations={this.props.items}
         selectedDay={this.state.selectedDay}
